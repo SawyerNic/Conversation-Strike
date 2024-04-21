@@ -4,11 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "pretest": "eslint --ignore-pattern node_modules -c ./.eslintrc.js ./server --fix",
     "test": "echo \"Tests complete\"",
     "webpack": "webpack",
     "nodemon": "nodemon -e js,html,css --watch ./hosted --watch ./server ./server/app.js ",
     "start": "node ./server/app.js",
-    "pretest": "eslint -c ./.eslintrc ./server --fix",
     "build": "gulp build",
     "watch": "gulp watch",
     "gitTask": "gulp gitTask && git push",
@@ -38,5 +38,8 @@
     "webpack": "^5.91.0",
     "webpack-cli": "^5.1.4",
     "webpack-stream": "^7.0.0"
+  },
+  "devDependencies": {
+    "eslint": "^9.1.0"
   }
 }

@@ -4,9 +4,36 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "webpack": "webpack",
+    "nodemon": "nodemon -e js,html,css --watch ./hosted --watch ./server ./server/app.js ",
+    "start": "node ./server/app.js",
+    "pretest": "eslint ./server --fix",
+    "build": "gulp build",
+    "watch": "gulp watch",
+    "gitTask": "gulp gitTask",
+    "heroku-postbuild": "gulp herokuBuild"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "babel": "^6.23.0",
+    "connect-redis": "^7.1.1",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "express-handlebars": "^7.1.2",
+    "express-session": "^1.18.0",
+    "gulp": "^5.0.0",
+    "gulp-eslint-new": "^2.0.0",
+    "gulp-nodemon": "^2.5.0",
+    "gulp-sass": "^5.1.0",
+    "heroku": "^8.11.4",
+    "mongoose": "^8.3.2",
+    "redis": "^4.6.13",
+    "sass": "^1.75.0",
+    "serve-favicon": "^2.5.0",
+    "webpack": "^5.91.0",
+    "webpack-stream": "^7.0.0"
+  }
 }

@@ -7,6 +7,36 @@ const webpackConfig = require('./webpack.config.js');
 
 const { exec } = require('child_process');
 
+// compile our css
+const sassTask = (done) => {
+    gulp.src('./scss/main.scss')
+        .pipe(sass().on('error', sass.logError))
+        .pipe(gulp.dest('./hosted'));
+
+    done();
+};
+
+// run webpack with our configurations in webpack.config.js
+const jsTask = (done) => {
+    webpack(webpackConfig)
+        .pipe(gulp.dest('./hosted'));
+    
+    done();
+}
+
+// lint our tasks as according to our .eslintrc file
+const lintTask = (done) => {
+    gulp.src('./server/**/*.js')
+        .pipe(eslint({fix: true}))
+        .pipe(eslint.format())
+        .pipe(eslint.failAfterError());
+    
+    done();
+}
+
+const build = gulp.parallel(sassTask, jsTask, lintTask);
+const herokuBuild = gulp.parallel(sassTask, jsTask);
+
 // adds, commits and pushes our code to github
 const gitTask = (done) => {
     exec('git add . && git commit -m "auto commit" && git push', (err, stdout, stderr) =>{
@@ -32,35 +62,8 @@ const gitTask = (done) => {
     done();
 };
 
-// compile our css
-const sassTask = (done) => {
-    gulp.src('./scss/main.scss')
-        .pipe(sass().on('error', sass.logError))
-        .pipe(gulp.dest('./hosted'));
 
-    done();
-};
 
-// run webpack with our configurations in webpack.config.js
-const jsTask = (done) => {
-    webpack(webpackConfig)
-        .pipe(gulp.dest('./hosted'));
-    
-    done();
-};
-
-// lint our tasks as according to our .eslintrc file
-const lintTask = (done) => {
-    gulp.src('./server/**/*.js')
-        .pipe(eslint({fix: true}))
-        .pipe(eslint.format())
-        .pipe(eslint.failAfterError());
-    
-    done();
-}
-
-const build = gulp.parallel(sassTask, jsTask, lintTask);
-const herokuBuild = gulp.parallel(sassTask, jsTask);
 
 const watch = (done) => {
     gulp.watch('./scss', sassTask);

@@ -46,14 +46,6 @@ const gitTask = (done) => {
             //node couldn't execute the command
             return;
         }
-        exec('git push', (err, stdout, stderr) => {
-            if (err) {
-                console.log('Error in git push:', stderr);
-                return;
-            }
-            console.log('Successfully pushed to git');
-            console.log(`stdout: ${stdout}`)
-        });
         // the *entire* stdout and stderr (buffered)
         console.log(`stdout: ${stdout}`);
         console.log(`stderr ${stderr}`);

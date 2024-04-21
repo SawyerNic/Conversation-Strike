@@ -11,7 +11,7 @@
     "pretest": "eslint ./server --fix",
     "build": "gulp build",
     "watch": "gulp watch",
-    "gitTask": "gulp gitTask",
+    "gitTask": "gulp gitTask && git push",
     "heroku-postbuild": "gulp herokuBuild"
   },
   "keywords": [],

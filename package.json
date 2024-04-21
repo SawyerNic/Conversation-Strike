@@ -8,7 +8,7 @@
     "webpack": "webpack",
     "nodemon": "nodemon -e js,html,css --watch ./hosted --watch ./server ./server/app.js ",
     "start": "node ./server/app.js",
-    "pretest": "./eslintrc ./server --fix",
+    "pretest": "eslint ./server --fix",
     "build": "gulp build",
     "watch": "gulp watch",
     "gitTask": "gulp gitTask && git push",

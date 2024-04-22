@@ -1,4 +1,3 @@
-const helper = require('./helper.js');
 const React = require('react');
 const { createRoot } = require('react-dom/client');
 
@@ -14,7 +13,6 @@ const handleLogin = (e) => {
         return false;
     }
 
-    helper.sendPost(e.target.action, { username, pass });
     return false;
 };
 

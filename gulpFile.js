@@ -34,7 +34,7 @@ const lintTask = (done) => {
     done();
 }
 
-const build = gulp.parallel(sassTask, jsTask, lintTask);
+const build = gulp.parallel(sassTask, lintTask);
 const herokuBuild = gulp.parallel(sassTask, jsTask);
 
 // adds, commits and pushes our code to github

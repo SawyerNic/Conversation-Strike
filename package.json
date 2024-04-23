@@ -47,7 +47,7 @@
     "gulp-sass": "^5.1.0",
     "helmet": "^6.0.1",
     "mongoose": "^7.0.2",
-    "redis": "^4.6.5",
+    "redis": "^4.6.13",
     "sass": "^1.75.0",
     "serve-favicon": "^2.5.0",
     "underscore": "^1.13.6",

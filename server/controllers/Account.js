@@ -2,7 +2,7 @@ const models = require('../models')
 
 const { Account } = models;
 
-const loginPage = (req, res) => res.render('login');
+const loginPage = (req, res) => res.render('loginPage');
 
 module.exports = {
   loginPage,
@@ -28,7 +28,7 @@ const login = (req, res) => {
 
     req.session.account = Account.toAPI(account);
 
-    return res.json({ redirect: '/maker' });
+    return res.json({ redirect: '/home' });
   });
 };
 

@@ -24,4 +24,5 @@ module.exports = {
         path: path.resolve(__dirname, 'hosted'),
         filename: '[name]Bundle.js',
     },
+    devtool: 'source-map',
 };

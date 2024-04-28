@@ -4,7 +4,6 @@ const helper = require('./helper.js');
 
 const handleLogin = (e) => {
     e.preventDefault();
-    helper.hideError();
 
     const username = e.target.querySelector('#user').value;
     const pass = e.target.querySelector('#pass').value;
@@ -14,12 +13,12 @@ const handleLogin = (e) => {
         return false;
     }
 
+    helper.sendPost(e.target.action, { username, pass });
     return false;
 };
 
 const handleSignup = (e) => {
     e.preventDefault();
-    helper.hideError();
 
     const username = e.target.querySelector('#user').value;
     const pass = e.target.querySelector('#pass').value;
@@ -39,7 +38,7 @@ const LoginWindow = (props) => {
             <form id="loginForm"
                 name="loginForm"
                 onSubmit={handleLogin}
-                action="/login"
+                action="/handleLogin"
                 method="POST"
                 className="mainForm"
             >

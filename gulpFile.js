@@ -18,10 +18,8 @@ const sassTask = (done) => {
 
 // run webpack with our configurations in webpack.config.js
 const jsTask = (done) => {
-    webpack(webpackConfig)
+    return webpack(webpackConfig)
         .pipe(gulp.dest('./hosted'));
-    
-    done();
 }
 
 // lint our tasks as according to our .eslintrc file
@@ -34,7 +32,7 @@ const lintTask = (done) => {
     done();
 }
 
-const build = gulp.parallel(sassTask, lintTask);
+const build = gulp.parallel(sassTask, lintTask, jsTask);
 const herokuBuild = gulp.parallel(sassTask, jsTask);
 
 // adds, commits and pushes our code to github
@@ -56,12 +54,11 @@ const gitTask = (done) => {
 
 const watch = (done) => {
     gulp.watch('./scss/**/*.scss', sassTask);
-    gulp.watch(['./client/**/*.js', './client/**/*.jsx'], jsTask);
+    gulp.watch(['./client/*.js', './client/*.jsx'], jsTask);
     nodemon({ 
         script: './server/app.js',
         tasks: ['lintTask'],
         watch: ['./server'],
-        done: done
     });
 }
 

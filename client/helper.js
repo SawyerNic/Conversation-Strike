@@ -1,39 +1,66 @@
 const handleError = (message) => {
     document.getElementById('errorMessage').textContent = message;
-    document.getElementById('domoMessage').classList.remove('hidden');
 };
 
 const sendPost = async (url, data, handler) => {
-    const response = await fetch(url, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
-    });
+    try {
+        const response = await fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+        });
 
-    const result = await response.json();
-    document.getElementById('Message').classList.add('hidden');
 
-    if (result.redirect) {
-        window.location = result.redirect;
-    }
+        const result = await response.json();
 
-    if (result.error) {
-        handleError(result.error);
-    }
+        if (result.redirect) {
+            window.location = result.redirect;
+        }
 
-    if(handler) {
-        handler(result);
+        if(result.error){
+            console.log('doing stuff');
+
+            handleError(result.error);
+        }
+
+        if(handler) {
+            handler(result);
+        }
+    } catch (error) {
+        console.error('Error:', error);
     }
 };
 
-const hideError = () => {
-    document.getElementById('Message').classList.add('hidden');
+const sendPostXML = async (url, data, handler) => {
+    try {
+        const response = await fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/xml',
+            },
+            body: JSON.stringify(data),
+        });
+
+
+        const result = await response.text();
+
+        if (result.redirect) {
+            window.location = result.redirect;
+        }
+
+        if(handler) {
+            handler(result);
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        handleError(error.message);
+    }
 };
 
 module.exports = {
     handleError,
     sendPost,
-    hideError,
+    sendPostXML,
 };

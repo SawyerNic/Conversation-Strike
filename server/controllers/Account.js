@@ -15,7 +15,9 @@ const logout = (req, res) => {
 
 const login = (req, res) => {
   const username = `${req.body.username}`;
-  const pass = `${req.body.password}`;
+  const pass = `${req.body.pass}`;
+
+
 
   if (!username || !pass) {
     return res.status(400).send('Username and password are required');

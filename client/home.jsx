@@ -3,31 +3,31 @@ const { createRoot } = require('react-dom/client');
 const helper = require('./helper.js');
 const { Link } = require('react-router-dom');
 
-
-// Import your images
+// Import images for the application
 const myImage = require('../hosted/img/csgoct.png').default;
 const csgosas = require('../hosted/img/csgosas.png').default;
 const csgot = require('../hosted/img/csgot.png').default;
 const csgot2 = require('../hosted/img/csgot2.jpeg').default;
 
+// Component for creating and submitting a post form
 const PostForm = ({ onPost }) => {
+    // Handles the submission of the post form
     const handlePost = async (e) => {
         e.preventDefault();
 
         const form = e.target;
-        const title = e.target.querySelector('#title').value;
-        const topic = e.target.querySelector('#topic').value;
-        const content = e.target.querySelector('#contentArea').value;
+        const title = form.querySelector('#title').value;
+        const topic = form.querySelector('#topic').value;
+        const content = form.querySelector('#contentArea').value;
 
         if (!title || !topic || !content) {
             helper.handleError('All fields are required!');
             return false;
         }
 
-        const response = await helper.sendPost(e.target.action, { title, topic, content });
+        const response = await helper.sendPost(form.action, { title, topic, content });
 
         if (response) {
-            // If the post request was successful, reset the form
             form.reset();
             onPost(response);
         }
@@ -36,11 +36,7 @@ const PostForm = ({ onPost }) => {
     };
 
     return (
-        <form id="PostForm"
-            action="/handlePost"
-            onSubmit={handlePost}
-            method="POST"
-        >
+        <form id="PostForm" action="/handlePost" onSubmit={handlePost} method="POST">
             <h1>Share Wisdom</h1>
             <label>Title:</label>
             <input id="title" type="text" name="title" placeholder="Title" />
@@ -53,7 +49,6 @@ const PostForm = ({ onPost }) => {
                     <option value="gun-stats">Gun Stats</option>
                     <option value="other">Other</option>
                 </select>
-
             </div>
             <div>
                 <label>Content:</label>
@@ -63,22 +58,20 @@ const PostForm = ({ onPost }) => {
                 <input className="formSubmit" type="submit" value="Post" />
             </div>
         </form>
-    )
-}
+    );
+};
 
+// Component for displaying a feed of posts
 const PostFeed = ({ posts }) => {
     const [selectedTopic, setSelectedTopic] = React.useState('');
 
-    const handleTopicChange = (e) => {
-        setSelectedTopic(e.target.value);
-    };
-
+    // Filters posts based on the selected topic
     const filteredPosts = selectedTopic ? posts.filter(post => post.topic === selectedTopic) : posts;
 
     return (
         <div id="PostFeed">
             <label>Topics</label>
-            <select onChange={handleTopicChange}>
+            <select onChange={e => setSelectedTopic(e.target.value)}>
                 <option value="">None Specified</option>
                 <option value="movement">Movement</option>
                 <option value="map-strats">Map Strats</option>
@@ -95,10 +88,12 @@ const PostFeed = ({ posts }) => {
     );
 };
 
+// Main homepage component
 const HomePage = () => {
     const images = [myImage, csgosas, csgot, csgot2];
     const [posts, setPosts] = React.useState([]);
 
+    // Fetches posts from the server
     const fetchPosts = async () => {
         const response = await helper.sendGet('/getPosts');
         if (response && response.length > 0) {
@@ -112,8 +107,9 @@ const HomePage = () => {
         fetchPosts();
     }, []);
 
+    // Adds a new post to the state
     const handlePost = (newPost) => {
-        setPosts(prevPosts => [newPost, ...prevPosts]); // Add the new post at the top
+        setPosts(prevPosts => [newPost, ...prevPosts]);
     };
 
     return (
@@ -125,40 +121,37 @@ const HomePage = () => {
             </div>
         </div>
     );
-}
+};
 
+// Component for displaying animated images
 const AnimatedImages = ({ images }) => {
-    const doubledImages = [...images, ...images, ...images]; 
+    const doubledImages = [...images, ...images, ...images];
 
     return (
         <div>
-            {doubledImages.map((imagePath, index) => {
-                const randomTop = Math.random() * 60;
-                const randomDelay = Math.random() * -10; // random delay between 0s and -20s
-
-                return (
-
-                    <img
-                        key={index}
-                        src={imagePath}
-                        className="animated-image"
-                        style={{
-                            width: `${Math.random() * 300 + 50}px`, top: `${randomTop}vh`,
-                            animationDelay: `${randomDelay}s`, // set random animation delay
-                        }} // random size between 50px and 250px
-
-                    />
-                );
-            })}
+            {doubledImages.map((imagePath, index) => (
+                <img
+                    key={index}
+                    src={imagePath}
+                    className="animated-image"
+                    style={{
+                        width: `${Math.random() * 300 + 50}px`,
+                        top: `${Math.random() * 60}vh`,
+                        animationDelay: `${Math.random() * -10}s`,
+                    }}
+                />
+            ))}
         </div>
     );
 };
 
+// Component for changing the user's password
 const ChangePasswordForm = () => {
     const [username, setUsername] = React.useState('');
     const [oldPassword, setOldPassword] = React.useState('');
     const [newPassword, setNewPassword] = React.useState('');
 
+    // Handles the password change submission
     const handleChangePassword = async (e) => {
         e.preventDefault();
 
@@ -180,22 +173,20 @@ const ChangePasswordForm = () => {
     };
 
     return (
-        <form id="ChangePasswordForm"
-            onSubmit={handleChangePassword}
-        >
+        <form id="ChangePasswordForm" onSubmit={handleChangePassword}>
             <h1>Change Password</h1>
             <label>Username:</label>
-            <input id="username" type="text" value={username} onChange={(e) => setUsername(e.target.value)} />
+            <input id="username" type="text" value={username} onChange={e => setUsername(e.target.value)} />
             <label>Old Password:</label>
-            <input id="oldPassword" type="password" value={oldPassword} onChange={(e) => setOldPassword(e.target.value)} />
+            <input id="oldPassword" type="password" value={oldPassword} onChange={e => setOldPassword(e.target.value)} />
             <label>New Password:</label>
-            <input id="newPassword" type="password" value={newPassword} onChange={(e) => setNewPassword(e.target.value)} />
+            <input id="newPassword" type="password" value={newPassword} onChange={e => setNewPassword(e.target.value)} />
             <div>
                 <input className="formSubmit" type="submit" value="Change Password" />
             </div>
         </form>
-    )
-}
+    );
+};
 
 const init = () => {
     const changePassButton = document.getElementById('changePassword')
@@ -216,4 +207,5 @@ const init = () => {
     
 }
 
+// Assigns the init function to run when the window loads
 window.onload = init;

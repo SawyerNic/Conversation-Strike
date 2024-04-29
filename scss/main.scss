@@ -1,4 +1,3 @@
-// Define your color themes as maps
 $themes: (
   light: (
     primary: #FFC300,
@@ -21,7 +20,6 @@ $theme: map-get($themes, light);
 
 body {
     font-family: "Jersey 15", sans-serif;
-    /* other styles */
 }
 
 #logo {
@@ -119,7 +117,7 @@ body {
 }
 
 #content {
-    margin-top: 7vh; // adjust this value as needed
+    margin-top: 7vh;
     margin-left: 8vh;
     margin-right: 5vh;
     height: 60%;
@@ -141,8 +139,8 @@ body {
         height: 50vh;
         width: 30vh;
 
-        > * { // This selects all direct children of #PostForm
-            margin: 10px; // Adjust as needed
+        > * {
+            margin: 10px; 
         }
 
     }
@@ -152,7 +150,6 @@ footer {
     position: fixed;
     bottom: 0;
     width: 100%;
-    // other styles...
 }
 
 #PostForm, #PostFeed {
@@ -161,10 +158,10 @@ footer {
         display: block;
     }
 
-    background-color: map-get($theme, secondary); // replace with your secondary color variable or value
-    border-radius: 10px; // adjust as needed
-    padding: 20px; // add some padding so the content isn't flush against the edges
-    color: #fff; // add this line
+    background-color: map-get($theme, secondary); 
+    border-radius: 10px; 
+    padding: 20px;
+    color: #fff;
 
     #individualPost {
         margin: 1vh;

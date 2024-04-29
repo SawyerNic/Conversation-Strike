@@ -28,6 +28,8 @@ const sendPost = async (url, data, handler) => {
         if(handler) {
             handler(result);
         }
+
+        return result;
     } catch (error) {
         console.error('Error:', error);
     }

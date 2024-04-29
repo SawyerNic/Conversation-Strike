@@ -6,6 +6,8 @@ const router = (app) => {
   app.post('/signup', mid.requiresSecure, mid.requiresLogout, controllers.Account.signup);
   app.get('/logout', mid.requiresSecure, mid.requiresLogin, controllers.Account.logout );
   app.post('/handleLogin', mid.requiresSecure, mid.requiresLogout, controllers.Account.login);
+  app.post('/handlePost', mid.requiresSecure, mid.requiresLogin, controllers.Forum.post);
+  
   app.get('/home',  mid.requiresLogin, controllers.Forum.mainPage);
   app.get('/', mid.requiresSecure, mid.requiresLogout, controllers.Account.loginPage);
 };

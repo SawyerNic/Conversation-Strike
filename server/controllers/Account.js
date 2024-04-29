@@ -13,6 +13,7 @@ const logout = (req, res) => {
   return res.redirect('/');
 }
 
+
 const login = (req, res) => {
   const username = `${req.body.username}`;
   const pass = `${req.body.pass}`;
@@ -67,4 +68,5 @@ module.exports = {
   logout,
   login,
   signup,
+
 }

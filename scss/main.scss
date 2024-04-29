@@ -16,6 +16,13 @@ $themes: (
 
 $theme: map-get($themes, light);
 
+@import url('https://fonts.googleapis.com/css2?family=Jersey+15&display=swap');
+
+body {
+    font-family: "Jersey 15", sans-serif;
+    /* other styles */
+}
+
 #logo {
     width: 40px;
     display: block;
@@ -41,6 +48,7 @@ nav {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    flex-direction: column;
 }
 
 #loginButton, #signupButton, #logoutButton {
@@ -69,7 +77,7 @@ nav {
 
 #loginForm label, #signupForm label {
     display: flex;
-    align-self: flex-start;
+    align-self: center;
 }
 
 footer {
@@ -80,4 +88,30 @@ footer {
 body {
     margin: 0;
     padding: 0;
+}
+
+#signupSection {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.animated-image {
+    position: fixed;
+    opacity: 0.3;
+    animation: slide 6s linear infinite;
+    z-index: -1; // make images the back-most element
+    top: 0; // initial top position
+    left: 0; // initial left position
+    right: 0; // stretch the image to the right edge of the screen
+    bottom: 0; // stretch th
+}
+
+@keyframes slide {
+    0% {
+        transform: translateX(-400%) rotate(0deg);
+    }
+    100% {
+        transform: translateX(1000%) rotate(360deg);
+    }
 }

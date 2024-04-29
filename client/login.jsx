@@ -31,44 +31,55 @@ const handleSignup = (e) => {
 
     helper.sendPost(e.target.action, { username, pass, pass2 });
     return false;
+};
+
+const WebsiteDescription = (props) => {
+    return (
+        <div>
+            <p>This forum is for conversations about the game Counter Strike 2</p>
+            <p>Post may consist of but are not limited to: Movement Mechanics, Map Glitches, Gun Stats, Skins, etc.</p>
+        </div>
+    )
 }
 
 const LoginWindow = (props) => {
     return (
-            <form id="loginForm"
-                name="loginForm"
-                onSubmit={handleLogin}
-                action="/handleLogin"
-                method="POST"
-                className="mainForm"
-            >
-                <label htmlFor="username">Username: </label>
-                <input id="user" type="text" name="username" placeholder="username" />
-
-                <label htmlFor="pass">Password: </label>
-                <input id="pass" type="password" name="pass" placeholder="password" />
-                <input className="formSubmit" type="submit" value="Sign in" />
-            </form>
-    ); 
-};
-
-const SignupWindow = (props) => {
-    return (
-        <form id="signupForm"
-            name="signupForm"
-            onSubmit={handleSignup}
-            action="/signup"
+        <form id="loginForm"
+            name="loginForm"
+            onSubmit={handleLogin}
+            action="/handleLogin"
             method="POST"
             className="mainForm"
         >
             <label htmlFor="username">Username: </label>
             <input id="user" type="text" name="username" placeholder="username" />
+
             <label htmlFor="pass">Password: </label>
             <input id="pass" type="password" name="pass" placeholder="password" />
-            <label htmlFor="pass2">Password: </label>
-            <input id="pass2" type="password" name="pass2" placeholder="retype password" />
-            <input className="formSubmit" type="submit" value="Sign up" />
+            <input className="formSubmit" type="submit" value="Sign in" />
         </form>
+    );
+};
+
+const SignupWindow = (props) => {
+    return (
+        <div>
+            <form id="signupForm"
+                name="signupForm"
+                onSubmit={handleSignup}
+                action="/signup"
+                method="POST"
+                className="mainForm"
+            >
+                <label htmlFor="username">Username: </label>
+                <input id="user" type="text" name="username" placeholder="username" />
+                <label htmlFor="pass">Password: </label>
+                <input id="pass" type="password" name="pass" placeholder="password" />
+                <label htmlFor="pass2">Confirm Password: </label>
+                <input id="pass2" type="password" name="pass2" placeholder="retype password" />
+                <input className="formSubmit" type="submit" value="Sign up" />
+            </form>
+        </div>
     );
 };
 
@@ -80,7 +91,9 @@ const init = () => {
 
     loginButton.addEventListener('click', (e) => {
         e.preventDefault();
-        root.render(<LoginWindow />);
+        root.render(
+            <LoginWindow />
+        );
         return false;
     });
 
@@ -88,7 +101,14 @@ const init = () => {
         e.preventDefault();
         console.log('signupButton clicked');
 
-        root.render(<SignupWindow />);
+        root.render(
+            <>
+                <div id="signupSection">
+                    <WebsiteDescription />
+                    <SignupWindow />
+                </div>
+            </>
+        );
         return false;
     });
 

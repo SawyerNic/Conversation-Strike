@@ -7,9 +7,11 @@ const router = (app) => {
   app.get('/logout', mid.requiresSecure, mid.requiresLogin, controllers.Account.logout );
   app.post('/handleLogin', mid.requiresSecure, mid.requiresLogout, controllers.Account.login);
   app.post('/handlePost', mid.requiresSecure, mid.requiresLogin, controllers.Forum.post);
-  
+  app.get('/getPosts', mid.requiresSecure, mid.requiresLogin, controllers.Forum.getPosts);
   app.get('/home',  mid.requiresLogin, controllers.Forum.mainPage);
+  app.post('/changePassword', mid.requiresLogin, controllers.Account.changePassword);
   app.get('/', mid.requiresSecure, mid.requiresLogout, controllers.Account.loginPage);
+  
 };
 
 module.exports = router;

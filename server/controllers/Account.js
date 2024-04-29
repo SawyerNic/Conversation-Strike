@@ -13,12 +13,9 @@ const logout = (req, res) => {
   return res.redirect('/');
 }
 
-
 const login = (req, res) => {
   const username = `${req.body.username}`;
   const pass = `${req.body.pass}`;
-
-
 
   if (!username || !pass) {
     return res.status(400).send('Username and password are required');
@@ -63,10 +60,28 @@ const signup = async (req, res) => {
   }
 };
 
-module.exports = {
-  loginPage,
-  logout,
-  login,
-  signup,
+const changePassword = async (req, res) => {
+    const username = `${req.body.username}`;
+    const oldPassword = `${req.body.oldPassword}`;
+    const newPassword = `${req.body.newPassword}`;
 
-}
+    if (!oldPassword || !newPassword) {
+        return res.status(400).json({ error: 'Old and new password are required' });
+    }
+
+    try {
+        await Account.changePassword(username, oldPassword, newPassword);
+        return res.json({ success: 'Password changed successfully' });
+    } catch (err) {
+        console.error(err);
+        return res.status(500).json({ error: 'An error occurred' });
+    }
+};
+
+module.exports = {
+    loginPage,
+    logout,
+    login,
+    signup,
+    changePassword, // Add this line
+};

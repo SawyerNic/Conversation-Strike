@@ -37,7 +37,7 @@ const WebsiteDescription = (props) => {
     return (
         <div>
             <p>This forum is for conversations about the game Counter Strike 2</p>
-            <p>Post may consist of but are not limited to: Movement Mechanics, Map Glitches, Gun Stats, Skins, etc.</p>
+            <p>Posts may consist of but are not limited to: Movement Mechanics, Map Glitches, Gun Stats, Skins, etc.</p>
         </div>
     )
 }

@@ -3,8 +3,9 @@ $themes: (
   light: (
     primary: #FFC300,
     secondary: #001D3D,
-    background: #fff,
-    text: #000814
+    background: #939393,
+    text: #000814,
+    lighterBlue: #003962
   ),
   dark: (
     primary: #FFD60A,
@@ -49,9 +50,10 @@ nav {
     padding: 0;
     box-sizing: border-box;
     flex-direction: column;
+    
 }
 
-#loginButton, #signupButton, #logoutButton {
+#loginButton, #signupButton, #logoutButton, #changePassword {
     padding: 10px;
     background-color: map-get($theme, primary);
     color: text;
@@ -99,7 +101,7 @@ body {
 .animated-image {
     position: fixed;
     opacity: 0.3;
-    animation: slide 6s linear infinite;
+    animation: slide 15s linear infinite;
     z-index: -1; // make images the back-most element
     top: 0; // initial top position
     left: 0; // initial left position
@@ -112,6 +114,63 @@ body {
         transform: translateX(-400%) rotate(0deg);
     }
     100% {
-        transform: translateX(1000%) rotate(360deg);
+        transform: translateX(1000%) rotate(420deg);
     }
 }
+
+#content {
+    margin-top: 7vh; // adjust this value as needed
+    margin-left: 8vh;
+    margin-right: 5vh;
+    height: 60%;
+
+    #HomePage {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    #PostFeed {
+        overflow-y: scroll;
+        height: 70vh;
+        width: 100vh;
+    }
+
+    #PostForm {
+        margin-right: 10vh;
+        margin-left: 10vh;
+        height: 50vh;
+        width: 30vh;
+
+        > * { // This selects all direct children of #PostForm
+            margin: 10px; // Adjust as needed
+        }
+
+    }
+}
+
+footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    // other styles...
+}
+
+#PostForm, #PostFeed {
+
+    label {
+        display: block;
+    }
+
+    background-color: map-get($theme, secondary); // replace with your secondary color variable or value
+    border-radius: 10px; // adjust as needed
+    padding: 20px; // add some padding so the content isn't flush against the edges
+    color: #fff; // add this line
+
+    #individualPost {
+        margin: 1vh;
+        padding: 10px;
+        background-color: map-get($theme, lighterBlue);
+        border-radius: 10px;
+    }
+}
+

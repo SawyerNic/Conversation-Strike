@@ -61,8 +61,47 @@ const sendPostXML = async (url, data, handler) => {
     }
 };
 
+const sendGet = async (url, handler) => {
+    try {
+        const response = await fetch(url, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+
+        const result = await response.json();
+
+        if (result.redirect) {
+            window.location = result.redirect;
+        }
+
+        if(result.error){
+            console.log('doing stuff');
+
+            handleError(result.error);
+        }
+
+        if(handler) {
+            handler(result);
+        }
+
+        return result;
+    } catch (error) {
+        console.error('Error:', error);
+    }
+};
+
+// In helper.js
+const handleSuccess = (message) => {
+    console.log(message);
+    // Add your success handling code here
+};
+
 module.exports = {
+    handleSuccess,
     handleError,
     sendPost,
     sendPostXML,
+    sendGet
 };

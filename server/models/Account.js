@@ -48,6 +48,29 @@ AccountSchema.statics.authenticate = async (username, password, callback) => {
     }
 };
 
+AccountSchema.methods.validatePassword = function(password) {
+    return bcrypt.compare(password, this.password);
+  };
+
+AccountSchema.statics.changePassword = async function(username, oldPassword, newPassword) {
+  const account = await this.findOne({ username });
+
+  if (!account) {
+    throw new Error('Account not found');
+  }
+
+  const isMatch = await account.validatePassword(oldPassword);
+
+  if (!isMatch) {
+    throw new Error('Old password is incorrect');
+  }
+
+  account.password = await this.generateHash(newPassword);
+  await account.save();
+
+  return account;
+};
+
+
 AccountModel = mongoose.model('Account', AccountSchema);
 module.exports = AccountModel;
-

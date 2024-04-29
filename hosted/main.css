@@ -138,3 +138,12 @@ footer {
   background-color: #003962;
   border-radius: 10px;
 }
+
+#adSpace {
+  position: absolute;
+  right: 0;
+  margin: 1vh;
+  padding: 2px;
+  background-color: white;
+  border-radius: 10px;
+}

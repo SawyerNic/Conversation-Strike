@@ -11,6 +11,7 @@
     "start": "node ./server/app.js",
     "build": "gulp build",
     "watch": "gulp watch",
+    "sassTask": "gulp sassTask",
     "gitTask": "gulp gitTask && git push",
     "heroku-postbuild": "gulp herokuBuild"
   },

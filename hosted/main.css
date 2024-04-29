@@ -1,0 +1,62 @@
+#logo {
+  width: 40px;
+  display: block;
+  margin: 5px;
+  margin-right: 20px;
+  margin-top: 0px;
+}
+
+nav {
+  background-color: #001D3D;
+  height: 70px;
+  align-items: center;
+  display: flex;
+  justify-content: flex-start;
+  padding: 0 20px;
+}
+
+#content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80%;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+#loginButton, #signupButton, #logoutButton {
+  padding: 10px;
+  background-color: #FFC300;
+  color: text;
+  border-radius: 5px;
+  margin: 5px;
+}
+
+#loginForm, #signupForm {
+  width: 10%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+#loginForm *, #signupForm * {
+  margin-top: 10px;
+}
+#loginForm input, #signupForm input {
+  margin-bottom: 15px;
+}
+
+#loginForm label, #signupForm label {
+  display: flex;
+  align-self: flex-start;
+}
+
+footer {
+  height: 10%;
+  background-color: #FFC300;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}

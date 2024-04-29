@@ -1,0 +1,83 @@
+// Define your color themes as maps
+$themes: (
+  light: (
+    primary: #FFC300,
+    secondary: #001D3D,
+    background: #fff,
+    text: #000814
+  ),
+  dark: (
+    primary: #FFD60A,
+    secondary: #FFC300,
+    background: #000814,
+    text: #fff
+  )
+);
+
+$theme: map-get($themes, light);
+
+#logo {
+    width: 40px;
+    display: block;
+    margin: 5px;
+    margin-right: 20px;
+    margin-top: 0px;
+}
+
+nav {
+    background-color: map-get($theme, secondary);
+    height: 70px;
+    align-items: center;
+    display: flex;
+    justify-content: flex-start; 
+    padding: 0 20px;
+}
+
+#content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80%;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+#loginButton, #signupButton, #logoutButton {
+    padding: 10px;
+    background-color: map-get($theme, primary);
+    color: text;
+    border-radius: 5px;
+    margin: 5px;
+}
+
+#loginForm, #signupForm {
+    width: 10%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+
+    * {
+        margin-top:10px;
+    }
+
+    input {
+        margin-bottom: 15px;
+    }
+}
+
+#loginForm label, #signupForm label {
+    display: flex;
+    align-self: flex-start;
+}
+
+footer {
+    height: 10%;
+    background-color: map-get($theme, primary);
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}

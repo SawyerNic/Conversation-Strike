@@ -1,5 +1,5 @@
 ## About The Project
-This Project is a simple anonymous forum to discuss the video game Counter Strike 2. After creating an account, you can post about topics such as movement, map strats, skins and gun stats.
+This Project is a simple forum to discuss the video game Counter Strike 2. After creating an account, you can post about topics such as movement, map strats, skins and gun stats.
 
 
 <div align="center">
